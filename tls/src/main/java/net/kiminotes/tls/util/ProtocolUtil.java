@@ -11,6 +11,7 @@ public final class ProtocolUtil {
 
     public static final int UINT8_MAX  = 0XFF;
     public static final int UINT16_MAX = 0XFFFF;
+    public static final int UINT24_MAX = 0XFFFFFF;
 
     public static int toUint8(int value) {
         if (0 <= value && value <= UINT8_MAX) {
@@ -24,6 +25,13 @@ public final class ProtocolUtil {
             return UINT16_MAX & value;
         }
         throw new IllegalArgumentException(value + " out of range 0 ~ " + UINT16_MAX);
+    }
+
+    public static int toUint24(int value) {
+        if (0 <= value && value <= UINT24_MAX) {
+            return UINT24_MAX & value;
+        }
+        throw new IllegalArgumentException(value + " out of range 0 ~ " + UINT24_MAX);
     }
 
     private ProtocolUtil() {
