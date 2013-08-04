@@ -13,10 +13,22 @@ public class ClientHello extends HandshakeBody {
 
     private ProtocolVersion     clientVersion;
     private Random              random;
+    /**
+     * uint8
+     */
+    private int                 sessionIdLength;
     // length: 0 ~ 32
     private byte[]              sessionId;
-    // length: 2 ~ 2 ^ 16 -1
+    /**
+     * uint16
+     */
+    private int                 cipherSuitesLength;
+    // length: 2 ~ 2 ^ 16 -1, uint16
     private int[]               cipherSuites;
+    /**
+     * uint8
+     */
+    private int                 compressionMethodsLength;
     // length: 1 ~ 2 ^ 8 - 1
     private CompressionMethod[] compressionMethods;
 

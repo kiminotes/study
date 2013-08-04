@@ -15,6 +15,9 @@ public class ServerHello extends HandshakeBody {
     private Random            random;
     // length: 0 ~ 32
     private byte[]            sessionId;
+    /**
+     * uint16
+     */
     private int               cipherSuite;
     private CompressionMethod compressionMethod;
 
