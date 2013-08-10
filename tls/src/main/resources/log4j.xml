@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+  Copyright 2013 kiminotes.lv@gmail.com.
+  All rights reserved.
+-->
+
+<!--
+    Author: kiminotes.lv@gmail.com
+-->
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+    <appender name="STDOUT" class="org.apache.log4j.ConsoleAppender">
+        <param name="target" value="System.out"/>
+        <param name="encoding" value="UTF-8"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d %5p %c{2} - %m%n"/>
+        </layout>
+    </appender>
+    <appender name="FILE" class="org.apache.log4j.RollingFileAppender">
+        <param name="file" value="tls.log"/>
+        <param name="append" value="true"/>
+        <param name="maxFileSize" value="10MB"/>
+        <param name="maxBackupIndex" value="100"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d [%t] %-5p %C{6} (%F:%L) - %m%n"/>
+        </layout>
+    </appender>
+
+    <root>
+        <level value="INFO"/>
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="FILE"/>
+    </root>
+</log4j:configuration>
