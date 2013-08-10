@@ -1,8 +1,5 @@
 package net.kiminotes.tls.util;
 
-import javax.crypto.Mac;
-import javax.crypto.spec.SecretKeySpec;
-
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
