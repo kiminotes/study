@@ -26,7 +26,7 @@ public class TLSCompressed implements Serializable {
      * uint16
      */
     private int             length;
-    private byte[]          fragment;
+    private Object          fragment;
 
     public ContentType getType() {
         return type;
@@ -52,11 +52,11 @@ public class TLSCompressed implements Serializable {
         this.length = ProtocolUtil.toUint16(length);
     }
 
-    public byte[] getFragment() {
+    public Object getFragment() {
         return fragment;
     }
 
-    public void setFragment(byte[] fragment) {
+    public void setFragment(Object fragment) {
         this.fragment = fragment;
     }
 }

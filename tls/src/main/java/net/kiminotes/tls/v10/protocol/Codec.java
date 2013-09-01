@@ -37,7 +37,17 @@ public class Codec {
     }
 
     void encodeTLSPlainText(TLSPlainText tlsPlainText, OutputStream os) throws IOException {
-        int round = tlsPlainText.getFragment().length / TLSPlainText.MAX_LENGTH + 1;
+        Object fragment = tlsPlainText.getFragment();
+        byte[] bytes;
+        if (!(fragment instanceof byte[])) {
+            ByteArrayOutputStream bos = new ByteArrayOutputStream(512);
+            encode(fragment, bos);
+            bos.flush();
+            bytes = bos.toByteArray();
+        } else {
+            bytes = (byte[]) fragment;
+        }
+        int round = bytes.length / TLSPlainText.MAX_LENGTH + 1;
         for (int i = 0; i < round; i++) {
             // content type
             os.write(tlsPlainText.getType().value());
@@ -48,9 +58,9 @@ public class Codec {
 
             // fragment
             int offset = TLSPlainText.MAX_LENGTH * i;
-            int length = tlsPlainText.getFragment().length - offset;
+            int length = bytes.length - offset;
             length = Math.min(TLSPlainText.MAX_LENGTH, length);
-            os.write(tlsPlainText.getFragment(), offset, length);
+            os.write(bytes, offset, length);
         }
     }
 
