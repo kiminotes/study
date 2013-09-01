@@ -24,17 +24,17 @@ public final class Bytes {
     public static int bigEndianBytesToUint16(byte[] bytes, int offset) {
         assertOffsetAndLength(bytes, offset, 2);
         int result = 0;
-        result |= (bytes[offset + 1] & 0XFF) << 8;
-        result |= (bytes[offset + 0] & 0XFF) << 0;
+        result |= (bytes[offset + 0] & 0XFF) << 8;
+        result |= (bytes[offset + 1] & 0XFF) << 0;
         return result;
     }
 
     public static int bigEndianBytesToUint24(byte[] bytes, int offset) {
         assertOffsetAndLength(bytes, offset, 3);
         int result = 0;
-        result |= (bytes[offset + 2] & 0XFF) << 16;
+        result |= (bytes[offset + 0] & 0XFF) << 16;
         result |= (bytes[offset + 1] & 0XFF) << 8;
-        result |= (bytes[offset + 0] & 0XFF) << 0;
+        result |= (bytes[offset + 2] & 0XFF) << 0;
         return result;
     }
 
