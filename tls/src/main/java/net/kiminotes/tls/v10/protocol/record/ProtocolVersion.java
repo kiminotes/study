@@ -15,6 +15,15 @@ public class ProtocolVersion implements Serializable {
 
     public static final ProtocolVersion TLS_V_1 = new ProtocolVersion(3, 1);
 
+    public static ProtocolVersion create(int major, int minor) {
+        if (major == TLS_V_1.getMajor()
+            && minor == TLS_V_1.getMinor()) {
+            return TLS_V_1;
+        } else {
+            return new ProtocolVersion(major, minor);
+        }
+    }
+
     private static final long serialVersionUID = 8917368945192906263L;
 
     /**
