@@ -79,8 +79,27 @@ public enum CipherSuiteIdentifier {
         this.value = ProtocolUtil.toUint16(value);
     }
 
-    public static int[] getSupportedCipherSuite() {
-        return new int[]{};
+    public static int[] getSupportedCipherSuiteValue() {
+        CipherSuiteIdentifier[] ids = getSupportedCipherSuite();
+        if (ids != null
+            && ids.length > 0) {
+            int[] result = new int[ids.length];
+            for (int i = 0; i < ids.length; i++) {
+                result[i] = ids[i].value();
+            }
+            return result;
+        }
+        return null;
+    }
+
+    public static CipherSuiteIdentifier[] getSupportedCipherSuite() {
+        return new CipherSuiteIdentifier[] {
+            TLS_RSA_WITH_RC4_128_MD5,
+            TLS_RSA_WITH_RC4_128_SHA,
+            TLS_RSA_WITH_IDEA_CBC_SHA,
+            TLS_RSA_WITH_DES_CBC_SHA,
+            TLS_RSA_WITH_3DES_EDE_CBC_SHA,
+        };
     }
 
 }
