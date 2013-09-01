@@ -32,4 +32,14 @@ public enum HandshakeType {
         this.value = ProtocolUtil.toUint8(value);
     }
 
+    public static HandshakeType getHandshakeType(int value) {
+        for (HandshakeType type : values()) {
+            if (type.value() == value) {
+                return type;
+            }
+        }
+
+        throw new IllegalArgumentException("Unsupported handshake type " + value);
     }
+
+}

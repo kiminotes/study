@@ -12,6 +12,32 @@ import java.io.IOException;
  */
 public final class Bytes {
 
+    public static int bigEndianBytesToUint8(byte[] bytes) {
+        return bigEndianBytesToUint8(bytes, 0);
+    }
+
+    public static int bigEndianBytesToUint8(byte[] bytes, int offset) {
+        assertOffsetAndLength(bytes, offset, 1);
+        return bytes[offset] & 0XFF;
+    }
+
+    public static int bigEndianBytesToUint16(byte[] bytes, int offset) {
+        assertOffsetAndLength(bytes, offset, 2);
+        int result = 0;
+        result |= (bytes[offset + 1] & 0XFF) << 8;
+        result |= (bytes[offset + 0] & 0XFF) << 0;
+        return result;
+    }
+
+    public static int bigEndianBytestoUint24(byte[] bytes, int offset) {
+        assertOffsetAndLength(bytes, offset, 3);
+        int result = 0;
+        result |= (bytes[offset + 2] & 0XFF) << 16;
+        result |= (bytes[offset + 1] & 0XFF) << 8;
+        result |= (bytes[offset + 0] & 0XFF) << 0;
+        return result;
+    }
+
     public static byte[] uint16ToBigEndianBytes(int value) {
         return longToBigEndianBytes(value, new byte[2]);
     }
@@ -33,7 +59,7 @@ public final class Bytes {
     }
 
     public static int bigEndianBytesToUint16(byte[] bytes) {
-        return (int) bigEndianBytesToLong(bytes);
+        return bigEndianBytesToUint16(bytes, 0);
     }
 
     public static byte[] uint24ToBigEndianBytes(int value) {
@@ -41,7 +67,7 @@ public final class Bytes {
     }
 
     public static int bigEndianBytesToUint24(byte[] bytes) {
-        return (int) bigEndianBytesToLong(bytes);
+        return bigEndianBytestoUint24(bytes, 0);
     }
 
     public static byte[] uint32ToBigEndianBytes(long value) {
@@ -67,6 +93,16 @@ public final class Bytes {
             // ignore
         }
         return bos.toByteArray();
+    }
+
+    static void assertOffsetAndLength(byte[] bytes, int offset, int length) {
+        Assert.notNull(bytes, "bytes == null");
+
+        if (offset < 0
+            || offset >= bytes.length
+            || (offset + length) > bytes.length) {
+            throw new ArrayIndexOutOfBoundsException();
+        }
     }
 
     private Bytes() {
