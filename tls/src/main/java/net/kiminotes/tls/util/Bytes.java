@@ -29,7 +29,7 @@ public final class Bytes {
         return result;
     }
 
-    public static int bigEndianBytestoUint24(byte[] bytes, int offset) {
+    public static int bigEndianBytesToUint24(byte[] bytes, int offset) {
         assertOffsetAndLength(bytes, offset, 3);
         int result = 0;
         result |= (bytes[offset + 2] & 0XFF) << 16;
@@ -67,7 +67,7 @@ public final class Bytes {
     }
 
     public static int bigEndianBytesToUint24(byte[] bytes) {
-        return bigEndianBytestoUint24(bytes, 0);
+        return bigEndianBytesToUint24(bytes, 0);
     }
 
     public static byte[] uint32ToBigEndianBytes(long value) {
