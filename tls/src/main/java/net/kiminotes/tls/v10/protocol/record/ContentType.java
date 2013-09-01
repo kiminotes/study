@@ -29,4 +29,13 @@ public enum ContentType {
         return this.value;
     }
 
+    public static ContentType getContentType(int value) {
+        for(ContentType type : values()) {
+            if (type.value == value) {
+                return type;
+            }
+        }
+        return null;
+    }
+
 }
